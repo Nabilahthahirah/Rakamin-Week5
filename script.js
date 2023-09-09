@@ -11,6 +11,7 @@ class FormulirRegistrasi {
     this.nomorRegistrasi = 1;
     this.totalUmur = 0;
     this.totalUangsaku = 0;
+    this.data = [];
 
     this.form.addEventListener("submit", async (e) => {
       e.preventDefault(); // Mencegah pengiriman formulir
@@ -62,16 +63,14 @@ class FormulirRegistrasi {
   }
 
   tambahkanDataKeTabel(nomorRegistrasi, nama, umur, uangsaku) {
-    let newRow = this.tableBody.insertRow(this.tableBody.rows.length);
-    let cell1 = newRow.insertCell(0);
-    let cell2 = newRow.insertCell(1);
-    let cell3 = newRow.insertCell(2);
-    let cell4 = newRow.insertCell(3);
+    let entry = [nomorRegistrasi, nama, umur, uangsaku];
+    this.data.push(entry);
 
-    cell1.innerHTML = nomorRegistrasi;
-    cell2.innerHTML = nama;
-    cell3.innerHTML = umur;
-    cell4.innerHTML = uangsaku;
+    let newRow = this.tableBody.insertRow();
+    for (let i = 0; i < entry.length; i++) {
+      let cell = newRow.insertCell(i);
+      cell.textContent = entry[i];
+    }
   }
 
   updateRataRata(umur, uangsaku) {
